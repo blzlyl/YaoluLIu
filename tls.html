@@ -1,0 +1,194 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>liu18tafmec &#8212; myPhD 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="PhD progress" href="project.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="project.html" title="PhD progress"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">myPhD 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="liu18tafmec">
+<h1>liu18tafmec<a class="headerlink" href="#liu18tafmec" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>This documentation explains the code for reproducing the results presented in:</dt>
+<dd>Liu, Y., van der Meer, F.P. and Sluys, L.J., 2018. Cohesive zone and interfacial thick level set modeling of the dynamic double cantilever beam test of composite laminate. Theoretical and Applied Fracture Mechanics, 96, pp.617-630.  [<a class="reference external" href="https://doi.org/10.1016/j.tafmec.2018.07.004">doi</a>]</dd>
+</dl>
+<p>This paper is divided into two parts. The first part is about using a rate-dependent cohesive zone model to simulate the dynamic double cantilever beam test of composite laminate at different test rates. The second part is about using interfacial thick-level-set approach to simulate the same series of tests as the cohesive zone modeling part. Therefore, two types of source codes are adopted, one for each part of the paper. The difference between this two types of source codes are mainly the implementation of <strong>InterfaceModel</strong> class.</p>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>The program for the computations is called <strong>fem-opt</strong> and is compiled and linked using the standard jemjive framework.  No external libraries are needed.</div></blockquote>
+<p>The jemjive code is located in <code class="docutils literal notranslate"><span class="pre">./src_czm</span></code> and <code class="docutils literal notranslate"><span class="pre">./src_itls</span></code> and consists of the following important files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AdaptiveStepModule</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">DirichletModel</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">GroupInputModule</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">InterfaceModel</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">MayCohesiveMat</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">TlsCohesiveMat</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">ContactCohesiveMat</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">SetInitCondModel</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">LoadDispModel</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">SolidModel</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">OrthotropicMaterial</span><span class="o">.</span><span class="p">[</span><span class="n">cpp</span><span class="o">|</span><span class="n">h</span><span class="p">]</span>
+<span class="n">MatrixModel</span><span class="o">.</span><span class="n">cpp</span>
+</pre></div>
+</div>
+<p>To compile to code, in the terminal go to the source code folder (<code class="docutils literal notranslate"><span class="pre">./src_czm</span></code> or <code class="docutils literal notranslate"><span class="pre">./src_itls</span></code>) and  type <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">opt</span></code>. This generates the executable file.</p>
+</div>
+<div class="section" id="mesh-generation">
+<h2>Mesh generation<a class="headerlink" href="#mesh-generation" title="Permalink to this headline">¶</a></h2>
+<p>The mesh for the bulk material is first generated by a gmsh file stored in <code class="docutils literal notranslate"><span class="pre">./meshgen/dcb.geo</span></code> and then passed to a interface generator to create the interface
+elements embedded along the middle plane of the beam. These operations can be done by running <code class="docutils literal notranslate"><span class="pre">./makeMesh</span></code>. For example, a typical mesh snapshot is shown in Fig. 1.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/dcb.png"><img alt="_images/dcb.png" src="_images/dcb.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 1: Mesh refinement near the crack tip</span></p>
+</div>
+</div>
+<div class="section" id="czm">
+<h2>CZM<a class="headerlink" href="#czm" title="Permalink to this headline">¶</a></h2>
+<p>To generate the time crack length curve in fig.3(a), you need the input files located at <code class="docutils literal notranslate"><span class="pre">./inputs/czm/v33</span></code>. This folder contains the input files used to simulate the
+dynamic DCB test at a test rate of 3.3e-5 m/s and a post-processing file as well. As a typical example, the needed files include:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">interface</span><span class="o">.</span><span class="n">mesh</span> <span class="p">(</span><span class="n">mesh</span> <span class="n">file</span> <span class="k">for</span> <span class="n">interface</span><span class="p">)</span>
+<span class="n">solid</span><span class="o">.</span><span class="n">mesh</span> <span class="p">(</span><span class="n">mesh</span> <span class="n">file</span> <span class="k">for</span> <span class="n">the</span> <span class="n">bulk</span> <span class="n">material</span><span class="p">)</span>
+<span class="n">test</span><span class="o">.</span><span class="n">pro</span> <span class="p">(</span><span class="nb">property</span> <span class="n">file</span><span class="p">)</span>
+<span class="n">getCrackInfo</span><span class="o">.</span><span class="n">m</span> <span class="p">(</span><span class="n">matlab</span> <span class="n">file</span> <span class="k">for</span> <span class="n">plotting</span> <span class="n">the</span> <span class="n">crack</span> <span class="n">length</span> <span class="n">curve</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Type <code class="docutils literal notranslate"><span class="pre">./src_czm/fem-opt</span> <span class="pre">test.pro</span></code> to run the simulation and run <code class="docutils literal notranslate"><span class="pre">getCrackInfo.m</span></code> for post-processing.</p>
+<p>The input files for the other three test rate cases (Fig. 3(b), (c), (d) of the paper) are stored in <code class="docutils literal notranslate"><span class="pre">./inputs/czm/(v1|v65|v10)</span></code>.</p>
+</div>
+<div class="section" id="itls">
+<h2>ITLS<a class="headerlink" href="#itls" title="Permalink to this headline">¶</a></h2>
+<p>The dynamic version of interfacial thick-level-set approach is presented in this part of work.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/itls.png"><img alt="_images/itls.png" src="_images/itls.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Figure 2: interfacial thick-level-set approach</span></p>
+</div>
+<div class="section" id="verification-study">
+<h3>Verification study<a class="headerlink" href="#verification-study" title="Permalink to this headline">¶</a></h3>
+<p>To reproduce the results shown in Section 4.1 of the paper, you need the source code stored in <code class="docutils literal notranslate"><span class="pre">./src_quasistatic</span></code>. This code has a slightly different implementation
+of the <strong>InterfaceModel</strong> class from <code class="docutils literal notranslate"><span class="pre">./src_itls</span></code>. This is because for this problem the displacement is first increased to the point when the energy release rate has reached a critical
+value and then kept as a fixed value. Afterwards, the damage zone is forced to grow manually and the energy release rate is calculated as the return.</p>
+<p>The input files of this study are stored in <code class="docutils literal notranslate"><span class="pre">./inputs/itls/section_4_1</span></code> and the post-processing files are <code class="docutils literal notranslate"><span class="pre">./inputs/getTLScrackHist.m</span></code> and <code class="docutils literal notranslate"><span class="pre">./inputs/ischemestudy.m</span></code>. The functionality of the post-processing files is self-explanary.</p>
+</div>
+<div class="section" id="parameter-calibration">
+<h3>Parameter&amp;Calibration<a class="headerlink" href="#parameter-calibration" title="Permalink to this headline">¶</a></h3>
+<p>Section 4.2 and 4.3 of the paper talk about the calibration of V(G) relation against experimentally measured crack length growth curve. Therefore, the simulation runs in
+similar manners except the parameter values have to be changed for each simulation.
+Therefore, by first compile the source code in <code class="docutils literal notranslate"><span class="pre">./src_itls</span></code> to generate the execulatable
+file and then provide the needed input property file, <code class="docutils literal notranslate"><span class="pre">test.pro</span></code>, to the program the simulation can be done.</p>
+<p>The input files for test rate 6.5 m/s and 10.0 m/s are given in <code class="docutils literal notranslate"><span class="pre">./inputs/itls/section4_2_3/v65</span></code> and <code class="docutils literal notranslate"><span class="pre">./inputs/itls/section4_2_3/v10</span></code> as examples. The post-processing file, <code class="docutils literal notranslate"><span class="pre">getTLScrackHist.m</span></code>, used to
+generate crack length curve is included in the same folder as the property files.</p>
+<p>It is noted that to generate the figure 15 in the paper (fig. 3 in the document), a post-processing file <code class="docutils literal notranslate"><span class="pre">MBTcomp.m</span></code> is needed. You can find this file in <code class="docutils literal notranslate"><span class="pre">./inputs/itls/section4_2_3/v1</span></code>.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="_images/fig15.png"><img alt="_images/fig15.png" src="_images/fig15.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Figure 3: the Fig.15 in the paper</span></p>
+</div>
+</div>
+<div class="section" id="experiment-data">
+<h3>Experiment data<a class="headerlink" href="#experiment-data" title="Permalink to this headline">¶</a></h3>
+<p>The experimental data files of crack growth curve are stored in <code class="docutils literal notranslate"><span class="pre">./expdata</span></code>.</p>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>To demonstrate a typical DCB simulation, see below</p>
+<video controls src="./_static/stable.mp4"></video></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">liu18tafmec</a><ul>
+<li><a class="reference internal" href="#code">Code</a></li>
+<li><a class="reference internal" href="#mesh-generation">Mesh generation</a></li>
+<li><a class="reference internal" href="#czm">CZM</a></li>
+<li><a class="reference internal" href="#itls">ITLS</a><ul>
+<li><a class="reference internal" href="#verification-study">Verification study</a></li>
+<li><a class="reference internal" href="#parameter-calibration">Parameter&amp;Calibration</a></li>
+<li><a class="reference internal" href="#experiment-data">Experiment data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="project.html"
+                        title="previous chapter">PhD progress</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tls.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="project.html" title="PhD progress"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">myPhD 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yaolu Liu.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

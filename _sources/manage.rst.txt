@@ -1,0 +1,51 @@
+
+Project management
+======================
+This documentation collects all the useful tools and skills I have learnt from my PhD project. Several aspects are covered, including C++ skills, computational tools and etc.
+
+
+Documentation tool: Sphinx
+--------------------------------
+A sample doc. tutorial with Sphinx can be found at https://matplotlib.org/sampledoc. A group tutorial_ on **How to organize project code** also has a nice chapter on Sphinx.
+
+
+.. _tutorial: _static/project_code_management.pdf   
+
+There is also an online documentation on Sphinx, the snapshot of which can be seen in Figure 1.
+
+.. figure:: _static/sphnixshot.png
+   :align: center
+   :width: 400 px
+   
+   Figure 1: Snapshot of the Sphinx online documentation
+
+Profile C++ application
+--------------------------------
+How to profile C++ application with Callgrind / KCacheGrind:
+https://baptiste-wicht.com/posts/2011/09/profile-c-application-with-callgrind-kcachegrind.html. With this program, the executation time of each part of a C++ application can be determined, which will be helpful in optimization of computational time.
+
+The basic comands are:
+
+* valgrind --tool=callgrind program [program_options]. For example, ``valgrind --tool=callgrind ../../src/fem-opt test.pro`` 
+
+
+* kcachegrind callgrind.out.(id)
+
+
+.. figure:: _static/Valgrind.png
+   :align: center
+   :width: 600 px
+   
+   Figure 2: Use KCachegrind to visualize Valgrind output
+   
+Version control
+--------------------------------
+Git or Mercurial
+
+My Github account: https://github.com/blzlyl/CohesiveMultiscale
+
+   
+Git hub
+--------------------------------
+
+https://www.quora.com/How-do-I-upload-HTML-files-to-a-GitHub-page
